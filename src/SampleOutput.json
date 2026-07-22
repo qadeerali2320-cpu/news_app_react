@@ -1,0 +1,405 @@
+{
+  "status": "success",
+  "totalResults": 2800,
+  "results": [
+    {
+      "article_id": "5549302ff9b239ef0616c10882df4a9e",
+      "link": "https://www.burytimes.co.uk/sport/national/26300146.ben-stokes-hits-match-winning-hundred-durham-return/",
+      "title": "Ben Stokes hits match-winning hundred on Durham return",
+      "description": "Former England captain Stokes made his first appearance since his international retirement in the One Day Cup win over Derbyshire.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "source:pa",
+        "topics:sport"
+      ],
+      "creator": [
+        "pa news agency"
+      ],
+      "language": "english",
+      "country": [
+        "united kingdom"
+      ],
+      "category": [
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-07-21 19:45:50",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-07-21 21:40:45",
+      "image_url": "https://www.burytimes.co.uk/resources/images/21217738/",
+      "video_url": null,
+      "source_id": "burytimes_uk",
+      "source_name": "The Bury Times",
+      "source_priority": 299535,
+      "source_url": "https://www.burytimes.co.uk",
+      "source_icon": "https://n.bytvi.com/burytimes_uk.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "2ada5be788935d778fd22306aa083311",
+      "link": "https://www.gazette-news.co.uk/sport/national/26300146.ben-stokes-hits-match-winning-hundred-durham-return/",
+      "title": "Ben Stokes hits match-winning hundred on Durham return",
+      "description": "Former England captain Stokes made his first appearance since his international retirement in the One Day Cup win over Derbyshire.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "source:pa",
+        "topics:sport"
+      ],
+      "creator": [
+        "pa news agency"
+      ],
+      "language": "english",
+      "country": [
+        "united kingdom"
+      ],
+      "category": [
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-07-21 19:45:50",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-07-21 21:08:16",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "gazette_news",
+      "source_name": "The Gazette",
+      "source_priority": 103253,
+      "source_url": "https://www.gazette-news.co.uk",
+      "source_icon": "https://n.bytvi.com/gazette_news.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "341e85d25cd84add513279b8ca900b3a",
+      "link": "https://www.ilkleygazette.co.uk/sport/national/26300146.ben-stokes-hits-match-winning-hundred-durham-return/",
+      "title": "Ben Stokes hits match-winning hundred on Durham return",
+      "description": "Former England captain Stokes made his first appearance since his international retirement in the One Day Cup win over Derbyshire.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "source:pa",
+        "topics:sport"
+      ],
+      "creator": [
+        "pa news agency"
+      ],
+      "language": "english",
+      "country": [
+        "united kingdom"
+      ],
+      "category": [
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-07-21 19:45:50",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-07-21 20:16:08",
+      "image_url": "https://www.ilkleygazette.co.uk/resources/images/21217738/",
+      "video_url": null,
+      "source_id": "ilkleygazette_uk",
+      "source_name": "Ilkley Gazette",
+      "source_priority": 455521,
+      "source_url": "https://www.ilkleygazette.co.uk",
+      "source_icon": "https://n.bytvi.com/ilkleygazette_uk.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "15529e63fdbf12db246cbcee3bc0fd7f",
+      "link": "https://www.basingstokegazette.co.uk/sport/national/26300146.ben-stokes-hits-match-winning-hundred-durham-return/",
+      "title": "Ben Stokes hits match-winning hundred on Durham return",
+      "description": "Former England captain Stokes made his first appearance since his international retirement in the One Day Cup win over Derbyshire.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "topics:sport",
+        "source:pa"
+      ],
+      "creator": [
+        "pa news agency"
+      ],
+      "language": "english",
+      "country": [
+        "united kingdom"
+      ],
+      "category": [
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-07-21 19:45:50",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-07-21 20:15:56",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "basingstokegazette",
+      "source_name": "Basingstoke Gazette",
+      "source_priority": 343641,
+      "source_url": "https://www.basingstokegazette.co.uk",
+      "source_icon": "https://n.bytvi.com/basingstokegazette.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "9d22b266a2570d76797459377c172107",
+      "link": "https://www.ludlowadvertiser.co.uk/sport/national/26300146.ben-stokes-hits-match-winning-hundred-durham-return/",
+      "title": "Ben Stokes hits match-winning hundred on Durham return",
+      "description": "Former England captain Stokes made his first appearance since his international retirement in the One Day Cup win over Derbyshire.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "source:pa",
+        "topics:sport"
+      ],
+      "creator": [
+        "pa news agency"
+      ],
+      "language": "english",
+      "country": [
+        "united kingdom"
+      ],
+      "category": [
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-07-21 19:45:50",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-07-21 22:18:36",
+      "image_url": "https://www.ludlowadvertiser.co.uk/resources/images/21217738/",
+      "video_url": null,
+      "source_id": "ludlowadvertiser_uk",
+      "source_name": "Ludlow Advertiser",
+      "source_priority": 1819339,
+      "source_url": "https://www.ludlowadvertiser.co.uk",
+      "source_icon": "https://n.bytvi.com/ludlowadvertiser_uk.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "d2c469968b9094736a110dfee99cacbd",
+      "link": "https://www.bucksfreepress.co.uk/sport/national/26300146.ben-stokes-hits-match-winning-hundred-durham-return/",
+      "title": "Ben Stokes hits match-winning hundred on Durham return",
+      "description": "Former England captain Stokes made his first appearance since his international retirement in the One Day Cup win over Derbyshire.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "source:pa",
+        "topics:sport"
+      ],
+      "creator": [
+        "pa news agency"
+      ],
+      "language": "english",
+      "country": [
+        "united kingdom"
+      ],
+      "category": [
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-07-21 19:45:50",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-07-21 21:08:11",
+      "image_url": "https://www.bucksfreepress.co.uk/resources/images/21217738/",
+      "video_url": null,
+      "source_id": "bucksfreepress_co",
+      "source_name": "Bucksfreepress Co Uk",
+      "source_priority": 103166,
+      "source_url": "https://www.bucksfreepress.co.uk",
+      "source_icon": "https://n.bytvi.com/bucksfreepress_co.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "6ed2ce63dccd98794acdb1442e42e9e9",
+      "link": "https://jordantimes.com/news/features/cubes-and-lubes-europes-speedcubers-twist-for-glory",
+      "title": "Cubes and lubes: Europe's 'Speedcubers' twist for glory",
+      "description": "By Richard Carter ARNHEM, Netherlands-- Brows knitted with concentration, Juliette Sebastien clasps her trusty Rubik's Cube, her fingers moving at a head-...",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "speedcubers",
+        "glory",
+        "twist",
+        "europes",
+        "for",
+        "cubes",
+        "lubes:",
+        "and"
+      ],
+      "creator": [
+        "afp"
+      ],
+      "language": "english",
+      "country": [
+        "jordan"
+      ],
+      "category": [
+        "entertainment"
+      ],
+      "datatype": "analysis",
+      "pubDate": "2026-07-21 19:43:00",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-07-21 20:56:33",
+      "image_url": "https://jordantimes.com/jordantimes/uploads/images/2026/07/21/756913.webp",
+      "video_url": null,
+      "source_id": "jordantimes",
+      "source_name": "Jordan Times",
+      "source_priority": 78210,
+      "source_url": "http://jordantimes.com",
+      "source_icon": "https://n.bytvi.com/jordantimes.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "97dcdf7a020e81cb30fc52f96cec9ca7",
+      "link": "https://www.swapupdate.in/saif-ali-khans-matchday-style-and-historic-significance-behind-his-old-wykehamist-tie/",
+      "title": "Saif Ali Khan’s Matchday Style And Historic Significance Behind His Old Wykehamist Tie",
+      "description": "3 min readNew DelhiJul 21, 2026 09:00 PM IST Saif Ali Khan recently attended the India vs England ODI series decider at London’s iconic Lord’s Cricket Ground, joined by his...",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": [
+        "swapupdate"
+      ],
+      "language": "english",
+      "country": [
+        "india"
+      ],
+      "category": [
+        "sports"
+      ],
+      "datatype": "blog",
+      "pubDate": "2026-07-21 19:40:02",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-07-21 20:26:25",
+      "image_url": "https://data.indianexpress.com/election2019/track_1x1.jpg",
+      "video_url": null,
+      "source_id": "swapupdate",
+      "source_name": "Swapupdate",
+      "source_priority": 8488448,
+      "source_url": "https://www.swapupdate.in",
+      "source_icon": "https://n.bytvi.com/swapupdate.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "5694bd6d2610f7bb0c74e564a62c6302",
+      "link": "https://www.dailystar.co.uk/tv/eastenders-star-worlds-away-penny-37460631",
+      "title": "EastEnders star is worlds away from Penny Branning role in ITV's true crime drama",
+      "description": "Mia McKenna-Bruce originally played Penny Branning in EastEnders before landing the lead role in The Lady",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "christmas",
+        "netflix",
+        "eastenders",
+        "itv"
+      ],
+      "creator": [
+        "angie quinn"
+      ],
+      "language": "english",
+      "country": [
+        "united kingdom"
+      ],
+      "category": [
+        "world"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-07-21 19:39:57",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-07-21 20:02:04",
+      "image_url": "https://i2-prod.dailyrecord.co.uk/tv/article36772602.ece/ALTERNATES/s615/0_the-lady.jpg",
+      "video_url": null,
+      "source_id": "dailystar",
+      "source_name": "Dailystar Co Uk",
+      "source_priority": 3076,
+      "source_url": "https://www.dailystar.co.uk",
+      "source_icon": "https://n.bytvi.com/dailystar.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "2190f5f75d493db95505958a0ac716ca",
+      "link": "https://www.the-sun.com/sport/16727169/travis-kelce-trainer-leaks-nfl-retirement-date/",
+      "title": "Travis Kelce’s personal trainer leaks his NFL retirement date as Chiefs star is spotted working out ahead of season",
+      "description": "TRAVIS Kelce's personal trainer has leaked the Kansas City Chiefs star's retirement date. The Chiefs star has been spotted working out ahead of the 2026 NFL season. Kelce, 36, is entering his final season in the NFL. That is at least according to his personal trainer during a recent visit to Johnny O’s Gymnasium in...",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "nfl",
+        "kansas city chiefs",
+        "section: sport:american football",
+        "travis kelce"
+      ],
+      "creator": [
+        "henry ollis-brown"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-07-21 19:36:50",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-07-21 20:03:26",
+      "image_url": "https://www.the-sun.com/wp-content%2Fuploads%2Fsites%2F6%2F2026%2F07%2Fch-travis-retires-off-platform.jpg?quality%3D90%26strip%3Dall",
+      "video_url": null,
+      "source_id": "thesun",
+      "source_name": "The Sun",
+      "source_priority": 1813,
+      "source_url": "https://www.thesun.co.uk",
+      "source_icon": "https://n.bytvi.com/thesun.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    }
+  ],
+  "nextPage": "1784662610317927281"
+}
+ 
