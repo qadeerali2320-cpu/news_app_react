@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
-
 export class NewsItem extends Component {
   render() {
     let {title,description,imageUrl,newsUrl,source ,date}=this.props
     
     //  Fallback image (inline SVG )
     const fallbackImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e9ecef'/%3E%3Ctext x='150' y='100' font-family='Arial' font-size='16' fill='%236c757d' text-anchor='middle'%3ENo Image%3C/text%3E%3C/svg%3E";
-
     return (
       <div className='my-3'>
        <div className="card" style={{width :'18rem'}}>
   <img src={imageUrl||fallbackImage} className="card-img-top"
             alt={title || 'News image'}
-            style={{ height: '200px', objectFit: 'cover' }}
+            style={{ height: '300px', objectFit: 'cover' }}
             onError={(e) => {
               e.target.src =fallbackImage;
             }}/>
