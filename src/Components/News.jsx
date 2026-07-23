@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
-
+import './NewsCSS.css';  // CSS-Import
 
 export class News extends Component {
   constructor() {
@@ -26,8 +26,8 @@ export class News extends Component {
       let parsedData = await response.json();
            if (parsedData.status === 'success' && parsedData.results && Array.isArray(parsedData.results)) {
          const filteredArticles = parsedData.results
-          .filter((element) => !element.duplicate)
-          .filter((element) => element.image_url);
+          .filter((element) => !element.duplicate)//to remove same img from different resource and remove tht news
+          .filter((element) => element.image_url);// if no image with news remove that news
         this.setState({
           articles:filteredArticles,
           loading: false,
