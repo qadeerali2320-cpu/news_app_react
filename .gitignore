@@ -58,3 +58,11 @@ yarn-error.log*
 # MISC
 # ==============================
 *.local
+# Local Netlify folder
+.netlify
+
+
+# Environment variables
+.env
+.env.local
+.env.*.local
