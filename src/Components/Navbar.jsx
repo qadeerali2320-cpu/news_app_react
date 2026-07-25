@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import{Link} from "react-router-dom";
-import './Navbar.css';
+
 export class Navbar extends Component {
   render() {
     return (
@@ -9,6 +9,10 @@ export class Navbar extends Component {
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark-custom">
           <div className="container-fluid">
             <Link  className="navbar-brand" to="/">QdPiNews</Link>
+             {/* ✅ Toggler Button - Mobile mein dikhega */}
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+              <span className="navbar-toggler-icon"></span>
+            </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
