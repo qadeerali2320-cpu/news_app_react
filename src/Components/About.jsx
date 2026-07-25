@@ -49,7 +49,7 @@ export class About extends Component {
         </div>
 
         <div className="about-footer">
-          <p>Made with ❤️ by <strong>QdPiNews Team</strong></p>
+          <p>Made by <strong>QdPiNews Team</strong></p>
           <p className="small-text">© 2026 QdPiNews - All Rights Reserved</p>
         </div>
       </div>

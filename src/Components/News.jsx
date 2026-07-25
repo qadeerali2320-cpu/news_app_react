@@ -171,8 +171,8 @@ export class News extends Component {
         </div>
         <div className=" d-flex justify-content-between mt-4">
 
-          <button disabled={this.state.page < 1} type="button" onClick={this.handlePreviousPage} className="btn btn-warning">Previous ←</button>
-          <button type="button" onClick={this.handleNextPage} className="btn btn-warning">Nex→</button>
+          <button disabled={this.state.page < 1} type="button" onClick={this.handlePreviousPage} className="btn-pagination">Previous ←</button>
+          <button type="button" onClick={this.handleNextPage} className="btn-pagination">Nex→</button>
         </div>
 
       </div>
