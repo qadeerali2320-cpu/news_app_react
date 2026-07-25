@@ -1,77 +1,72 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import './NewsCSS.css';  // CSS-Import
+import PropTypes from 'prop-types'
 
 export class News extends Component {
+
+  static defaultProps = {
+    country: 'world',
+    pageSize: 8,
+    category: 'general'
+
+  }
+  static propTypes = {
+    country: PropTypes.string,
+    pageSize: PropTypes.number,
+    category: PropTypes.string
+  }
+
   constructor() {
     super();
-    
+
     this.state = {
       articles: [],
       loading: true,
-      error:null,
-       nextPageToken: null,  // ✅ Token store karne ke liye
-      hasMore: true,        // ✅ Next page available hai ya nahi
+      error: null,
+      nextPageToken: null,  //  Token store karne ke liye
+      hasMore: true,        //  Next page available hai ya nahi
     }
 
   }
-   
+    async componentDidUpdate(prevProps) {
+    if (prevProps.category !== this.props.category) {
+      console.log(`Category changed: ${prevProps.category} → ${this.props.category}`);
+      this.setState({
+        articles: [],
+        loading: true,
+        page: 1,
+        nextPageToken: null,
+        hasMore: true,
+        error: null,
+      }, () => {
+        this.fetchNews();
+      });
+    }
+  }
+
   async componentDidMount() {
-     this.setState({ loading: true });
-    try {
-      
-         //  NewsData.io API (Sahi hai!)
-        const apiKey = 'pub_ff3bbc19535440c9b43f8bdc075579a3';
-    const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=in&language=en&size=10`;
-      let response = await fetch(url);
-      let parsedData = await response.json();
-           if (parsedData.status === 'success' && parsedData.results && Array.isArray(parsedData.results)) {
-        //  const filteredArticles = parsedData.results
-        //   .filter((element) => !element.duplicate)//to remove same img from different resource and remove tht news
-        //   .filter((element) => element.image_url);// if no image with news remove that news
-         this.setState({
-           //articles:filteredArticles,
-          articles:parsedData.results,
-          loading: false,
-          error:null,
-          page : 1,
-        })
-      }
-      else {
-
-        console.log("API Error:", parsedData);
-        this.setState({
-          articles: [],
-          loading: false,
-            error: parsedData.errors ? parsedData.errors[0] : "No articles found",
-        });
-      }
-    }
- catch(error) {
-    console.error("Error fetching news:", error);
-    this.setState({
-      articles: [],
-      loading: false,
-    });
+    await this.fetchNews();
   }
-}
 
- fetchNews = async (pageToken = null) => {
+  fetchNews = async (pageToken = null) => {
     this.setState({ loading: true });
     try {
       const apiKey = 'pub_ff3bbc19535440c9b43f8bdc075579a3';
-      
-      // ✅ Agar token hai toh use karo, warna pehla page
-      let url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=in&language=en&size=10`;
-      if (pageToken) {
-        url += `&page=${pageToken}`;  // ✅ Token pass karo
+
+      //  Agar token hai toh use karo, warna pehla page
+      let url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=in&language=en&size=${this.props.pageSize}&q=${this.props.category}`;
+      // if (!pageToken) {
+      //   url += `&category=${this.props.category}`;
+      // }
+     if (pageToken) {
+        url += `&page=${pageToken}`;
       }
-      
       console.log("Fetching URL:", url);
-      
+
       let response = await fetch(url);
       let parsedData = await response.json();
-      
+
       console.log("API Response:", parsedData);
 
       if (parsedData.status === 'success' && parsedData.results && Array.isArray(parsedData.results)) {
@@ -79,9 +74,9 @@ export class News extends Component {
           articles: parsedData.results,
           loading: false,
           error: null,
-          nextPageToken: parsedData.nextPage || null,  // ✅ Naya token store karo
-          hasMore: !!parsedData.nextPage,              // ✅ Agar nextPage hai toh true
-          page: pageToken ? this.state.page + 1 : 1,   // ✅ Page number update
+          nextPageToken: parsedData.nextPage || null,  //  Naya token store karo
+          hasMore: !!parsedData.nextPage,              //  Agar nextPage hai toh true
+          page: pageToken ? this.state.page + 1 : 1,   //  Page number update
         });
       } else {
         this.setState({
@@ -91,7 +86,7 @@ export class News extends Component {
           hasMore: false,
         });
       }
-    } catch(error) {
+    } catch (error) {
       console.error("Error:", error);
       this.setState({
         articles: [],
@@ -102,11 +97,9 @@ export class News extends Component {
     }
   }
 
-  async componentDidMount() {
-    await this.fetchNews();
-  }
 
-  // ✅ Next Page - stored token use karo
+
+  //  Next Page - stored token use karo
   handleNextPage = async () => {
     const { nextPageToken } = this.state;
     if (nextPageToken) {
@@ -114,10 +107,10 @@ export class News extends Component {
     }
   }
 
-  // ✅ Previous Page - Page 1 par wapas jao (previous token nahi milta)
+  //  Previous Page - Page 1 par wapas jao (previous token nahi milta)
   handlePreviousPage = () => {
     if (this.state.page > 1) {
-      // ✅ Sirf Page 1 par wapas ja sakte ho
+      //  Sirf Page 1 par wapas ja sakte ho
       this.setState({ page: this.state.page - 1 }, () => {
         if (this.state.page === 1) {
           this.fetchNews(null); // Pehle page par jao
@@ -128,7 +121,7 @@ export class News extends Component {
 
   render() {
     const { articles, loading, error } = this.state;
-     // Loading
+    // Loading
     if (loading) {
       return (
         <div className="container news-container">
@@ -148,8 +141,8 @@ export class News extends Component {
         <div className="container news-container">
           <h2>Top Headlines</h2>
           <div className="error-message">
-          <p style={{ color: 'red' }}>⚠️ {error}</p>
-        </div>
+            <p style={{ color: 'red' }}>⚠️ {error}</p>
+          </div>
         </div>
       );
     }
@@ -178,7 +171,7 @@ export class News extends Component {
         </div>
         <div className=" d-flex justify-content-between mt-4">
 
-          <button disabled={this.state.page<1} type="button" onClick={this.handlePreviousPage} className="btn btn-warning">Previous ←</button>
+          <button disabled={this.state.page < 1} type="button" onClick={this.handlePreviousPage} className="btn btn-warning">Previous ←</button>
           <button type="button" onClick={this.handleNextPage} className="btn btn-warning">Nex→</button>
         </div>
 
