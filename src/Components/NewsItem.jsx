@@ -26,7 +26,7 @@ export class NewsItem extends Component {
               {date && (
                 <span className="date">📅 {new Date(date).toLocaleDateString()}</span>
               )}
-            </div>
+            </div>  
 
             <a href={newsUrl} target="_blank" rel="noopener noreferrer" className="btn-read-more">Read More →</a>
           </div>
