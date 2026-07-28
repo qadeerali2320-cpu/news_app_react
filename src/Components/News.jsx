@@ -17,8 +17,12 @@ export class News extends Component {
     category: PropTypes.string
   }
 
-  constructor() {
-    super();
+  capitalizeFirstCharacter=(string)=>{
+    return string.charAt(0).toUpperCase()+string.slice(1);
+  }
+
+  constructor(props) {
+    super(props);
 
     this.state = {
       articles: [],
@@ -27,7 +31,7 @@ export class News extends Component {
       nextPageToken: null,  //  Token store karne ke liye
       hasMore: true,        //  Next page available hai ya nahi
     }
-
+    document.title=`${this.capitalizeFirstCharacter(this.props.category)} -QdPiNews`
   }
     async componentDidUpdate(prevProps) {
     if (prevProps.category !== this.props.category) {
@@ -160,7 +164,7 @@ export class News extends Component {
     return (
 
       <div className="container news-container" >
-        <h2>Top Headlines </h2>
+        <h2>Top Headlines from {this.capitalizeFirstCharacter(this.props.category)} </h2>
         <div className="row">
           {this.state.articles.map((element) => {
             return <div className="col-md-4" key={element.article_id || element.link}>
