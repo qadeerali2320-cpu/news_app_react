@@ -74,6 +74,16 @@ export class News extends Component {
       console.log("API Response:", parsedData);
 
       if (parsedData.status === 'success' && parsedData.results && Array.isArray(parsedData.results)) {
+
+
+ //  Duplicate  + Invalid link news remove
+      const filteredArticles = parsedData.results
+        .filter((element) => !element.duplicate)                    // Duplicate hatao
+        .filter((element) => element.image_url)                     // Bina image wali hatao
+        .filter((element) => element.link && element.link.startsWith('http')); // Invalid link hatao
+      
+
+
         this.setState({
           articles: parsedData.results,
           loading: false,

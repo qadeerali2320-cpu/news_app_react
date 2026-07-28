@@ -5,7 +5,9 @@ export class NewsItem extends Component {
     let { title, description, imageUrl, newsUrl, source, date } = this.props
 
     //  Fallback image (inline SVG )
-    const fallbackImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e9ecef'/%3E%3Ctext x='150' y='100' font-family='Arial' font-size='16' fill='%236c757d' text-anchor='middle'%3ENo Image%3C/text%3E%3C/svg%3E";
+      const fallbackImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%231a1a2e'/%3E%3Ctext x='150' y='100' font-family='Arial' font-size='18' fill='%236c757d' text-anchor='middle'%3ENo Image%3C/text%3E%3Ctext x='150' y='125' font-family='Arial' font-size='12' fill='%23555' text-anchor='middle'%3EAvailable%3C/text%3E%3C/svg%3E";
+        const isValidUrl = newsUrl && newsUrl.startsWith('http');
+
     return (
       <div className='my-3'>
         <div className="card news-card" style={{ width: '18rem' }}>
@@ -27,8 +29,17 @@ export class NewsItem extends Component {
                 <span className="date">📅 {new Date(date).toLocaleDateString()}</span>
               )}
             </div>  
-
-            <a href={newsUrl} target="_blank" rel="noopener noreferrer" className="btn-read-more">Read More →</a>
+       
+            {/* <a href={newsUrl} target="_blank" rel="noopener noreferrer" className="btn-read-more">Read More →</a> */}
+             {isValidUrl ? (
+              <a href={newsUrl} target="_blank" rel="noopener noreferrer" className="btn-read-more">
+                Read More →
+              </a>
+            ) : (
+              <button className="btn-read-more" disabled style={{ opacity: 0.5, cursor: 'not-allowed' }}>
+                Link Unavailable
+              </button>
+            )}
           </div>
         </div>
       </div>
