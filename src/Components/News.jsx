@@ -72,20 +72,46 @@ export class News extends Component {
       let parsedData = await response.json();
 
       console.log("API Response:", parsedData);
+      
 
       if (parsedData.status === 'success' && parsedData.results && Array.isArray(parsedData.results)) {
 
 
- //  Duplicate  + Invalid link news remove
-      const filteredArticles = parsedData.results
-        .filter((element) => !element.duplicate)                    // Duplicate hatao
-        .filter((element) => element.image_url)                     // Bina image wali hatao
-        .filter((element) => element.link && element.link.startsWith('http')); // Invalid link hatao
-      
+//  //  Duplicate  + Invalid link news remove
+//       const filteredArticles = parsedData.results
+//         .filter((element) => !element.duplicate)                    // Duplicate hatao
+//         .filter((element) => element.image_url)                     // Bina image wali hatao
+//         .filter((element) => element.link && element.link.startsWith('http')); // Invalid link hatao
 
+    
+      const filteredArticles = parsedData.results
+        .filter((element) => {
+          const isDuplicate = element.duplicate;
+          const hasImage = element.image_url && element.image_url.length > 0;
+          
+       
+          const isValidLink = element.link && 
+            element.link.startsWith('http') && 
+            !element.link.includes('psuconnect') &&  // Block psuconnect
+            !element.link.includes('latestly') &&    // Block latestly
+            !element.link.includes('siasat');        // Block siasat
+          
+      
+       
+          
+          console.log("Article:", element.title);
+          console.log("  hasImage:", hasImage);
+          console.log("  isValidLink:", isValidLink);
+          console.log("  isDuplicate:", isDuplicate);
+          
+          
+          return !isDuplicate && hasImage && isValidLink ;
+        });
+
+      console.log("Filtered articles:", filteredArticles.length);
 
         this.setState({
-          articles: parsedData.results,
+          articles: filteredArticles,
           loading: false,
           error: null,
           nextPageToken: parsedData.nextPage || null,  //  Naya token store karo
