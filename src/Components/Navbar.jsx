@@ -9,7 +9,6 @@ export class Navbar extends Component {
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark-custom">
           <div className="container-fluid">
             <Link  className="navbar-brand" to="/">QdPiNews</Link>
-             {/* ✅ Toggler Button - Mobile mein dikhega */}
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
               <span className="navbar-toggler-icon"></span>
             </button>

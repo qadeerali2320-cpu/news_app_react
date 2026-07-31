@@ -55,13 +55,13 @@ export class News extends Component {
   }
 
   fetchNews = async (pageToken = null) => {
-    this.props.setProgress(0);
+    this.props.setProgress(10);
     this.setState({ loading: true });
     try {
-      const apiKey = 'pub_ff3bbc19535440c9b43f8bdc075579a3';
+      const apiKey = 'pub_7e492657a35144bb842eb66fae1b1cc0';
 
       //  Agar token hai toh use karo, warna pehla page
-      let url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=in&language=en&size=${this.props.pageSize}&q=${this.props.category}`;
+      let url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=PK&language=en&size=${this.props.pageSize}&q=${this.props.category}`;
       // if (!pageToken) {
       //   url += `&category=${this.props.category}`;
       // }
@@ -91,7 +91,7 @@ export class News extends Component {
           });
 
         console.log("Filtered articles:", filteredArticles.length);
-        this.props.setProgress(50);
+        this.props.setProgress(60);
            const result = {
         articles: filteredArticles,
         totalResults: parsedData.totalResults,
