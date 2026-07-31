@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import './NewsCSS.css';  // CSS-Import
 import PropTypes from 'prop-types'
-
+import InfiniteScroll from 'react-infinite-scroll-component';
 export class News extends Component {
 
   static defaultProps = {
@@ -17,8 +17,8 @@ export class News extends Component {
     category: PropTypes.string
   }
 
-  capitalizeFirstCharacter=(string)=>{
-    return string.charAt(0).toUpperCase()+string.slice(1);
+  capitalizeFirstCharacter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   constructor(props) {
@@ -28,12 +28,13 @@ export class News extends Component {
       articles: [],
       loading: true,
       error: null,
+      totalResults: 0,
       nextPageToken: null,  //  Token store karne ke liye
       hasMore: true,        //  Next page available hai ya nahi
     }
-    document.title=`${this.capitalizeFirstCharacter(this.props.category)} -QdPiNews`
+    document.title = `${this.capitalizeFirstCharacter(this.props.category)} -QdPiNews`
   }
-    async componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     if (prevProps.category !== this.props.category) {
       console.log(`Category changed: ${prevProps.category} → ${this.props.category}`);
       this.setState({
@@ -63,57 +64,39 @@ export class News extends Component {
       // if (!pageToken) {
       //   url += `&category=${this.props.category}`;
       // }
-     if (pageToken) {
+      if (pageToken) {
         url += `&page=${pageToken}`;
       }
       console.log("Fetching URL:", url);
-
       let response = await fetch(url);
       let parsedData = await response.json();
-
       console.log("API Response:", parsedData);
-      
-
       if (parsedData.status === 'success' && parsedData.results && Array.isArray(parsedData.results)) {
+        const filteredArticles = parsedData.results
+          .filter((element) => {
+            const isDuplicate = element.duplicate;
+            const hasImage = element.image_url && element.image_url.length > 0;
+            const isValidLink = element.link &&
+              element.link.startsWith('http') &&
+              !element.link.includes('psuconnect') &&  // Block psuconnect
+              !element.link.includes('latestly') &&    // Block latestly
+              !element.link.includes('siasat');        // Block siasat
+            console.log("Article:", element.title);
+            console.log("  hasImage:", hasImage);
+            console.log("  isValidLink:", isValidLink);
+            console.log("  isDuplicate:", isDuplicate);
 
 
-//  //  Duplicate  + Invalid link news remove
-//       const filteredArticles = parsedData.results
-//         .filter((element) => !element.duplicate)                    // Duplicate hatao
-//         .filter((element) => element.image_url)                     // Bina image wali hatao
-//         .filter((element) => element.link && element.link.startsWith('http')); // Invalid link hatao
+            return !isDuplicate && hasImage && isValidLink;
+          });
 
-    
-      const filteredArticles = parsedData.results
-        .filter((element) => {
-          const isDuplicate = element.duplicate;
-          const hasImage = element.image_url && element.image_url.length > 0;
-          
-       
-          const isValidLink = element.link && 
-            element.link.startsWith('http') && 
-            !element.link.includes('psuconnect') &&  // Block psuconnect
-            !element.link.includes('latestly') &&    // Block latestly
-            !element.link.includes('siasat');        // Block siasat
-          
-      
-       
-          
-          console.log("Article:", element.title);
-          console.log("  hasImage:", hasImage);
-          console.log("  isValidLink:", isValidLink);
-          console.log("  isDuplicate:", isDuplicate);
-          
-          
-          return !isDuplicate && hasImage && isValidLink ;
-        });
-
-      console.log("Filtered articles:", filteredArticles.length);
+        console.log("Filtered articles:", filteredArticles.length);
 
         this.setState({
           articles: filteredArticles,
           loading: false,
           error: null,
+          totalResults: parsedData.totalResults,
           nextPageToken: parsedData.nextPage || null,  //  Naya token store karo
           hasMore: !!parsedData.nextPage,              //  Agar nextPage hai toh true
           page: pageToken ? this.state.page + 1 : 1,   //  Page number update
@@ -139,25 +122,36 @@ export class News extends Component {
 
 
 
-  //  Next Page - stored token use karo
-  handleNextPage = async () => {
-    const { nextPageToken } = this.state;
-    if (nextPageToken) {
-      await this.fetchNews(nextPageToken);
-    }
+  fetchMore = async () => {
+     const { nextPageToken, articles } = this.state;
+  
+ const result=await   this.fetchNews(nextPageToken)
+    this.setState({ articles: this.state.articles.concat(result.articles) })
+
+
   }
 
-  //  Previous Page - Page 1 par wapas jao (previous token nahi milta)
-  handlePreviousPage = () => {
-    if (this.state.page > 1) {
-      //  Sirf Page 1 par wapas ja sakte ho
-      this.setState({ page: this.state.page - 1 }, () => {
-        if (this.state.page === 1) {
-          this.fetchNews(null); // Pehle page par jao
-        }
-      });
-    }
-  }
+
+
+  // //  Next Page - stored token use karo
+  // handleNextPage = async () => {
+  //   const { nextPageToken } = this.state;
+  //   if (nextPageToken) {
+  //     await this.fetchNews(nextPageToken);
+  //   }
+  // }
+
+  // //  Previous Page - Page 1 par wapas jao (previous token nahi milta)
+  // handlePreviousPage = () => {
+  //   if (this.state.page > 1) {
+  //     //  Sirf Page 1 par wapas ja sakte ho
+  //     this.setState({ page: this.state.page - 1 }, () => {
+  //       if (this.state.page === 1) {
+  //         this.fetchNews(null); // Pehle page par jao
+  //       }
+  //     });
+  //   }
+  // }
 
   render() {
     const { articles, loading, error } = this.state;
@@ -201,19 +195,32 @@ export class News extends Component {
 
       <div className="container news-container" >
         <h2>Top Headlines from {this.capitalizeFirstCharacter(this.props.category)} </h2>
-        <div className="row">
-          {this.state.articles.map((element) => {
-            return <div className="col-md-4" key={element.article_id || element.link}>
-              <NewsItem title={element.title ? element.title.slice(0, 45) : "None"} description={element.description ? element.description.slice(0, 88) : "None"} imageUrl={element.image_url} newsUrl={element.link} source={element.source_name}
-                date={element.pubDate} />
+        <div className="container">
+          <InfiniteScroll
+            dataLength={this.state.articles.length}
+            next={this.fetchMore}
+            hasMore={this.state.articles.length !== this.state.totalResults}
+            loader={<p>Loading...</p>}
+            endMessage={<p style={{ textAlign: 'center' }}>All items loaded.</p>}
+          >
+
+
+            <div className="row">
+              {this.state.articles.map((element) => {
+                return <div className="col-md-4" key={element.article_id || element.link}>
+                  <NewsItem title={element.title ? element.title.slice(0, 45) : "None"} description={element.description ? element.description.slice(0, 88) : "None"} imageUrl={element.image_url} newsUrl={element.link} source={element.source_name}
+                    date={element.pubDate} />
+                </div>
+              })}
+
             </div>
-          })}
+          </InfiniteScroll>
         </div>
-        <div className=" d-flex justify-content-between mt-4">
+        {/* <div className=" d-flex justify-content-between mt-4">
 
           <button disabled={this.state.page < 1} type="button" onClick={this.handlePreviousPage} className="btn-pagination">Previous ←</button>
           <button type="button" onClick={this.handleNextPage} className="btn-pagination">Nex→</button>
-        </div>
+        </div> */}
 
       </div>
 
