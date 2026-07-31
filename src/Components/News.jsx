@@ -55,6 +55,7 @@ export class News extends Component {
   }
 
   fetchNews = async (pageToken = null) => {
+    this.props.setProgress(0);
     this.setState({ loading: true });
     try {
       const apiKey = 'pub_ff3bbc19535440c9b43f8bdc075579a3';
@@ -72,6 +73,7 @@ export class News extends Component {
       let parsedData = await response.json();
       console.log("API Response:", parsedData);
       if (parsedData.status === 'success' && parsedData.results && Array.isArray(parsedData.results)) {
+        this.props.setProgress(30);
         const filteredArticles = parsedData.results
           .filter((element) => {
             const isDuplicate = element.duplicate;
@@ -85,12 +87,11 @@ export class News extends Component {
             console.log("  hasImage:", hasImage);
             console.log("  isValidLink:", isValidLink);
             console.log("  isDuplicate:", isDuplicate);
-
-
             return !isDuplicate && hasImage && isValidLink;
           });
 
         console.log("Filtered articles:", filteredArticles.length);
+        this.props.setProgress(50);
            const result = {
         articles: filteredArticles,
         totalResults: parsedData.totalResults,
@@ -106,6 +107,7 @@ export class News extends Component {
           hasMore: !!parsedData.nextPage,              //  Agar nextPage hai toh true
           page: pageToken ? this.state.page + 1 : 1,   //  Page number update
         });
+        this.props.setProgress(100);
         return result;
       } else {
         this.setState({
@@ -114,6 +116,7 @@ export class News extends Component {
           error: parsedData.message || "No articles found",
           hasMore: false,
         });
+        this.props.setProgress(100);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -130,7 +133,7 @@ export class News extends Component {
 
   fetchMore = async () => {
      const { nextPageToken, articles } = this.state;
-  
+  if(nextPageToken){
  const result=await   this.fetchNews(nextPageToken)
    this.setState({
       articles: articles.concat(result.articles),
@@ -138,7 +141,7 @@ export class News extends Component {
       nextPageToken: result.nextPageToken,
       hasMore: result.hasMore,
     });
-
+  }
 
   }
   // //  Next Page - stored token use karo
