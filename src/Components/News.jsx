@@ -36,7 +36,6 @@ export class News extends Component {
   }
   async componentDidUpdate(prevProps) {
     if (prevProps.category !== this.props.category) {
-      console.log(`Category changed: ${prevProps.category} → ${this.props.category}`);
       this.setState({
         articles: [],
         loading: true,
@@ -59,45 +58,28 @@ export class News extends Component {
     this.setState({ loading: true });
     try {
       const apiKey = 'pub_7e492657a35144bb842eb66fae1b1cc0';
-
       //  Agar token hai toh use karo, warna pehla page
       let url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=PK&language=en&size=${this.props.pageSize}&q=${this.props.category}`;
-      // if (!pageToken) {
-      //   url += `&category=${this.props.category}`;
-      // }
       if (pageToken) {
         url += `&page=${pageToken}`;
       }
-      console.log("Fetching URL:", url);
       let response = await fetch(url);
       let parsedData = await response.json();
-      console.log("API Response:", parsedData);
       if (parsedData.status === 'success' && parsedData.results && Array.isArray(parsedData.results)) {
         this.props.setProgress(30);
         const filteredArticles = parsedData.results
           .filter((element) => {
             const isDuplicate = element.duplicate;
             const hasImage = element.image_url && element.image_url.length > 0;
-            const isValidLink = element.link &&
-              element.link.startsWith('http') &&
-              !element.link.includes('psuconnect') &&  // Block psuconnect
-              !element.link.includes('latestly') &&    // Block latestly
-              !element.link.includes('siasat');        // Block siasat
-            console.log("Article:", element.title);
-            console.log("  hasImage:", hasImage);
-            console.log("  isValidLink:", isValidLink);
-            console.log("  isDuplicate:", isDuplicate);
-            return !isDuplicate && hasImage && isValidLink;
+            return !isDuplicate && hasImage;
           });
-
-        console.log("Filtered articles:", filteredArticles.length);
         this.props.setProgress(60);
-           const result = {
-        articles: filteredArticles,
-        totalResults: parsedData.totalResults,
-        nextPageToken: parsedData.nextPage || null,
-        hasMore: !!parsedData.nextPage,
-      };
+        const result = {
+          articles: filteredArticles,
+          totalResults: parsedData.totalResults,
+          nextPageToken: parsedData.nextPage || null,
+          hasMore: !!parsedData.nextPage,
+        };
         this.setState({
           articles: filteredArticles,
           loading: false,
@@ -132,37 +114,18 @@ export class News extends Component {
 
 
   fetchMore = async () => {
-     const { nextPageToken, articles } = this.state;
-  if(nextPageToken){
- const result=await   this.fetchNews(nextPageToken)
-   this.setState({
-      articles: articles.concat(result.articles),
-      totalResults: result.totalResults,
-      nextPageToken: result.nextPageToken,
-      hasMore: result.hasMore,
-    });
-  }
+    const { nextPageToken, articles } = this.state;
+    if (nextPageToken) {
+      const result = await this.fetchNews(nextPageToken)
+      this.setState({
+        articles: articles.concat(result.articles),
+        totalResults: result.totalResults,
+        nextPageToken: result.nextPageToken,
+        hasMore: result.hasMore,
+      });
+    }
 
   }
-  // //  Next Page - stored token use karo
-  // handleNextPage = async () => {
-  //   const { nextPageToken } = this.state;
-  //   if (nextPageToken) {
-  //     await this.fetchNews(nextPageToken);
-  //   }
-  // }
-
-  // //  Previous Page - Page 1 par wapas jao (previous token nahi milta)
-  // handlePreviousPage = () => {
-  //   if (this.state.page > 1) {
-  //     //  Sirf Page 1 par wapas ja sakte ho
-  //     this.setState({ page: this.state.page - 1 }, () => {
-  //       if (this.state.page === 1) {
-  //         this.fetchNews(null); // Pehle page par jao
-  //       }
-  //     });
-  //   }
-  // }
 
   render() {
     const { articles, loading, error } = this.state;
@@ -212,17 +175,15 @@ export class News extends Component {
             next={this.fetchMore}
             hasMore={this.state.articles.length !== this.state.totalResults}
             loader={
-                <div className="text-center my-4">
-            <div className="loading-spinner spinner-border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-            <p style={{ color: 'white', marginTop: '10px' }}>Loading more news...</p>
-          </div>
+              <div className="text-center my-4">
+                <div className="loading-spinner spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+                <p style={{ color: 'white', marginTop: '10px' }}>Loading more news...</p>
+              </div>
             }
             endMessage={<p style={{ textAlign: 'center' }}>All items loaded.</p>}
           >
-
-
             <div className="row">
               {this.state.articles.map((element) => {
                 return <div className="col-md-4" key={element.article_id || element.link}>
@@ -234,12 +195,6 @@ export class News extends Component {
             </div>
           </InfiniteScroll>
         </div>
-        {/* <div className=" d-flex justify-content-between mt-4">
-
-          <button disabled={this.state.page < 1} type="button" onClick={this.handlePreviousPage} className="btn-pagination">Previous ←</button>
-          <button type="button" onClick={this.handleNextPage} className="btn-pagination">Nex→</button>
-        </div> */}
-
       </div>
 
     )
