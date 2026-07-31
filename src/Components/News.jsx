@@ -6,7 +6,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 export class News extends Component {
 
   static defaultProps = {
-    country: 'PK',
+    country: 'world',
     pageSize: 8,
     category: 'general'
 
@@ -59,7 +59,7 @@ export class News extends Component {
     try {
       const apiKey = 'pub_7e492657a35144bb842eb66fae1b1cc0';
       //  Agar token hai toh use karo, warna pehla page
-      let url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=PK&language=en&size=${this.props.pageSize}&q=${this.props.category}`;
+      let url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=world&language=en&size=${this.props.pageSize}&q=${this.props.category}`;
       if (pageToken) {
         url += `&page=${pageToken}`;
       }
