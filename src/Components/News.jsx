@@ -91,7 +91,12 @@ export class News extends Component {
           });
 
         console.log("Filtered articles:", filteredArticles.length);
-
+           const result = {
+        articles: filteredArticles,
+        totalResults: parsedData.totalResults,
+        nextPageToken: parsedData.nextPage || null,
+        hasMore: !!parsedData.nextPage,
+      };
         this.setState({
           articles: filteredArticles,
           loading: false,
@@ -101,6 +106,7 @@ export class News extends Component {
           hasMore: !!parsedData.nextPage,              //  Agar nextPage hai toh true
           page: pageToken ? this.state.page + 1 : 1,   //  Page number update
         });
+        return result;
       } else {
         this.setState({
           articles: [],
@@ -126,7 +132,12 @@ export class News extends Component {
      const { nextPageToken, articles } = this.state;
   
  const result=await   this.fetchNews(nextPageToken)
-    this.setState({ articles: this.state.articles.concat(result.articles) })
+   this.setState({
+      articles: articles.concat(result.articles),
+      totalResults: result.totalResults,
+      nextPageToken: result.nextPageToken,
+      hasMore: result.hasMore,
+    });
 
 
   }
