@@ -141,9 +141,6 @@ export class News extends Component {
 
 
   }
-
-
-
   // //  Next Page - stored token use karo
   // handleNextPage = async () => {
   //   const { nextPageToken } = this.state;
@@ -211,7 +208,14 @@ export class News extends Component {
             dataLength={this.state.articles.length}
             next={this.fetchMore}
             hasMore={this.state.articles.length !== this.state.totalResults}
-            loader={<p>Loading...</p>}
+            loader={
+                <div className="text-center my-4">
+            <div className="loading-spinner spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <p style={{ color: 'white', marginTop: '10px' }}>Loading more news...</p>
+          </div>
+            }
             endMessage={<p style={{ textAlign: 'center' }}>All items loaded.</p>}
           >
 
