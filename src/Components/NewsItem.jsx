@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './NewsCSS.css'
 export class NewsItem extends Component {
   render() {
+     console.log("News is rendering...");  // ✅ Ye line add karo 
     let { title, description, imageUrl, newsUrl, source, date } = this.props
       //  Fallback image (inline SVG )
     const fallbackImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%231a1a2e'/%3E%3Ctext x='150' y='100' font-family='Arial' font-size='18' fill='%236c757d' text-anchor='middle'%3ENo Image%3C/text%3E%3Ctext x='150' y='125' font-family='Arial' font-size='12' fill='%23555' text-anchor='middle'%3EAvailable%3C/text%3E%3C/svg%3E";    const isValidUrl = newsUrl && newsUrl.startsWith('http');

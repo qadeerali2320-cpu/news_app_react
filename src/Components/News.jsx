@@ -8,13 +8,15 @@ export class News extends Component {
   static defaultProps = {
     country: 'PK',
     pageSize: 8,
-    category: 'general'
+    category: 'general',
+     
 
   }
   static propTypes = {
     country: PropTypes.string,
     pageSize: PropTypes.number,
-    category: PropTypes.string
+    category: PropTypes.string,
+     
   }
 
   capitalizeFirstCharacter = (string) => {
@@ -57,9 +59,9 @@ export class News extends Component {
     this.props.setProgress(10);
     this.setState({ loading: true });
     try {
-      const apiKey = 'pub_7e492657a35144bb842eb66fae1b1cc0';
+       
       //  Agar token hai toh use karo, warna pehla page
-      let url = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=PK&language=en&size=${this.props.pageSize}&q=${this.props.category}`;
+      let url = `https://newsdata.io/api/1/news?apikey=${this.props.apiKey}&country=${this.props.country}&language=en&size=${this.props.pageSize}&q=${this.props.category}`;
       if (pageToken) {
         url += `&page=${pageToken}`;
       }
