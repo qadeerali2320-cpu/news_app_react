@@ -28,7 +28,7 @@ export class NewsItem extends Component {
             onLoad={() => { console.log("✅ Image loaded successfully:", imageUrl); }}
           />
           <div className="card-body d-flex flex-column">
-            <h5 className="news-card-title " style={{ minHeight: '60px' }}>{title ? title.slice(0, 55) : "No Title"}... </h5>
+            <h5 className="news-card-title " style={{ minHeight: '60px' }}>{title ? title.slice(0, 65) : "No Title"}... </h5>
             <p className="news-card-description" style={{ minHeight: '60px' }}>{description ? description.slice(0, 100) : ""}...</p>
             <div className="news-meta">  
               {source && (
