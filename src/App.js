@@ -18,7 +18,8 @@ import {
 
 export default class App extends Component {
   
- apiKey=process.env.REACT_APP_NEWS_API
+//  apiKey=process.env.REACT_APP_NEWS_API
+apiKey = 'pub_38580e65b08a403ba0067619e63d5d0c'; 
   state={
     progress:0,
   }
@@ -28,9 +29,12 @@ export default class App extends Component {
   }
 
   render() {
-   
+     console.log("API Key from env:", process.env.REACT_APP_NEWS_API);
+  console.log("API Key:", this.apiKey);
+      const basename = window.location.hostname === 'localhost' ? '' : '/news_app_react';
+
     return (
-      <Router >
+       <Router basename={basename}>
         <div>
            <LoadingBar
         color="#f11946"
