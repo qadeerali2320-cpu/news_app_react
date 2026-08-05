@@ -29,11 +29,6 @@ apiKey="pub_38580e65b08a403ba0067619e63d5d0c"
   }
 
   render() {
-//      console.log("API Key from env:", process.env.REACT_APP_NEWS_API);
-//   console.log("API Key:", this.apiKey);
-//       console.log("Current directory:", process.cwd());
-// console.log("All env vars:", process.env);
-// console.log("REACT_APP_NEWS_API:", process.env.REACT_APP_NEWS_API);
 
     return (
        <Router  >
