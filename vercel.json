@@ -1,0 +1,4 @@
+{
+  "buildCommand": "cross-env PUBLIC_URL=/ react-scripts build",
+  "outputDirectory": "build"
+}

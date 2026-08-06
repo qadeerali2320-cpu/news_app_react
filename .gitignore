@@ -213,3 +213,4 @@ vite.config.ts.timestamp-*
 .vite/
 >>>>>>> origin/main
 .vercel
+.env*
