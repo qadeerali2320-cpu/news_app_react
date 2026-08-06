@@ -1,136 +1,115 @@
-import React, { Component } from 'react'
+import React, { useState,useEffect, useCallback } from 'react'
 import NewsItem from './NewsItem'
 import './NewsCSS.css';  // CSS-Import
 import PropTypes from 'prop-types'
 import InfiniteScroll from 'react-infinite-scroll-component';
-export class News extends Component {
+const News =(props)=>{
 
-  static defaultProps = {
-    country: 'PK',
-    pageSize: 8,
-    category: 'general',
-     
-
-  }
-  static propTypes = {
-    country: PropTypes.string,
-    pageSize: PropTypes.number,
-    category: PropTypes.string,
-     
-  }
-
-  capitalizeFirstCharacter = (string) => {
+   const [articles, setArticles] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [totalResults, setTotalResults] = useState(0)
+  const [nextPageToken, setNextPageToken] = useState(null)
+  const [hasMore, setHasMore] = useState(true)
+  const [page, setPage] = useState(1)
+ const capitalizeFirstCharacter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+  useEffect(()=>{
+      document.title = `${capitalizeFirstCharacter(props.category)} -QdPiNews`
+  },[props.category])
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      articles: [],
-      loading: true,
-      error: null,
-      totalResults: 0,
-      nextPageToken: null,  //  Token store karne ke liye
-      hasMore: true,        //  Next page available hai ya nahi
-    }
-    document.title = `${this.capitalizeFirstCharacter(this.props.category)} -QdPiNews`
-  }
-  async componentDidUpdate(prevProps) {
-    if (prevProps.category !== this.props.category) {
-      this.setState({
-        articles: [],
-        loading: true,
-        page: 1,
-        nextPageToken: null,
-        hasMore: true,
-        error: null,
-      }, () => {
-        this.fetchNews();
-      });
-    }
-  }
-
-  async componentDidMount() {
-    await this.fetchNews();
-  }
-
-  fetchNews = async (pageToken = null) => {
-    this.props.setProgress(10);
-    this.setState({ loading: true });
+  const fetchNews = useCallback(async (pageToken = null) => {
+   if(props.setProgress) props.setProgress(10);
+    setLoading(true);
     try {
        
       //  Agar token hai toh use karo, warna pehla page
-      let url = `https://newsdata.io/api/1/news?apikey=${this.props.apiKey}&country=${this.props.country}&language=en&size=${this.props.pageSize}&q=${this.props.category}`;
+      let url = `https://newsdata.io/api/1/news?apikey=${props.apiKey}&country=${props.country}&language=en&size=${props.pageSize}&q=${props.category}`;
       if (pageToken) {
         url += `&page=${pageToken}`;
       }
-      let response = await fetch(url);
-      let parsedData = await response.json();
+      const response = await fetch(url);
+      const parsedData = await response.json();
       if (parsedData.status === 'success' && parsedData.results && Array.isArray(parsedData.results)) {
-        this.props.setProgress(30);
+        props.setProgress(30);
         const filteredArticles = parsedData.results
           .filter((element) => {
             const isDuplicate = element.duplicate;
             const hasImage = element.image_url && element.image_url.length > 0;
             return !isDuplicate && hasImage;
           });
-        this.props.setProgress(60);
-        const result = {
+        if(props.setProgress)props.setProgress(60);
+         const result = {
           articles: filteredArticles,
-          totalResults: parsedData.totalResults,
+          totalResults: parsedData.totalResults || 0,
           nextPageToken: parsedData.nextPage || null,
           hasMore: !!parsedData.nextPage,
-        };
-        this.setState({
-          articles: filteredArticles,
-          loading: false,
-          error: null,
-          totalResults: parsedData.totalResults,
-          nextPageToken: parsedData.nextPage || null,  //  Naya token store karo
-          hasMore: !!parsedData.nextPage,              //  Agar nextPage hai toh true
-          page: pageToken ? this.state.page + 1 : 1,   //  Page number update
-        });
-        this.props.setProgress(100);
-        return result;
-      } else {
-        this.setState({
-          articles: [],
-          loading: false,
-          error: parsedData.message || "No articles found",
-          hasMore: false,
-        });
-        this.props.setProgress(100);
+        }
+        if(pageToken){
+          setArticles(prev=>prev.concat(filteredArticles))
+        }
+        else{
+          setArticles(filteredArticles)
+        }
+
+         setLoading(false)
+        setError(null)
+        setTotalResults(parsedData.totalResults || 0)
+        setNextPageToken(parsedData.nextPage || null)
+        setHasMore(!!parsedData.nextPage)
+        setPage(prev => pageToken ? prev + 1 : 1)
+        if(props.setProgress)props.setProgress(100)
+          return result;
+      }else{
+         setArticles([])
+        setLoading(false)
+        setError(parsedData.message || "No articles found")
+        setHasMore(false)
+        if (props.setProgress) props.setProgress(100)
+        return null
       }
+
     } catch (error) {
-      console.error("Error:", error);
-      this.setState({
-        articles: [],
-        loading: false,
-        error: "Failed to fetch news",
-        hasMore: false,
-      });
+       console.error("Error:", error)
+      setArticles([])
+      setLoading(false)
+      setError("Failed to fetch news")
+      setHasMore(false)
+      if (props.setProgress) props.setProgress(100)
+      return null;
     }
-  }
+  },[props.apikey,props.country,props.pageSize,props.category,props.setProgress])
 
 
-
-  fetchMore = async () => {
-    const { nextPageToken, articles } = this.state;
+useEffect(()=>{
+  fetchNews();
+},[])
+  const fetchMore = useCallback( async () => {
+    //const { nextPageToken, articles } = state;
     if (nextPageToken) {
-      const result = await this.fetchNews(nextPageToken)
-      this.setState({
-        articles: articles.concat(result.articles),
-        totalResults: result.totalResults,
-        nextPageToken: result.nextPageToken,
-        hasMore: result.hasMore,
-      });
+      const result = await fetchNews(nextPageToken)
+      if(result){
+     setArticles(prev=>prev.concat(result.articles))
+     setTotalResults(result.totalResults)
+     setNextPageToken(result.nextPageToken)
+     setHasMore(result.hasMore)
     }
-
   }
-
-  render() {
-    const { articles, loading, error } = this.state;
+  },[nextPageToken,fetchNews])
+  useEffect(() => {
+    // Reset state when category changes
+    setArticles([])
+    setLoading(true)
+    setPage(1)
+    setNextPageToken(null)
+    setHasMore(true)
+    setError(null)
+    fetchNews()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.category])
+  
+   
     // Loading
     if (loading) {
       return (
@@ -170,12 +149,12 @@ export class News extends Component {
     return (
 
       <div className="container news-container" >
-        <h2>Top Headlines from {this.capitalizeFirstCharacter(this.props.category)} </h2>
+        <h2>Top Headlines from {capitalizeFirstCharacter(props.category)} </h2>
         <div className="container">
           <InfiniteScroll
-            dataLength={this.state.articles.length}
-            next={this.fetchMore}
-            hasMore={this.state.articles.length !== this.state.totalResults}
+            dataLength={articles.length}
+            next={fetchMore}
+            hasMore={hasMore}
             loader={
               <div className="text-center my-4">
                 <div className="loading-spinner spinner-border" role="status">
@@ -187,7 +166,7 @@ export class News extends Component {
             endMessage={<p style={{ textAlign: 'center' }}>All items loaded.</p>}
           >
             <div className="row">
-              {this.state.articles.map((element) => {
+              {articles.map((element) => {
                 return <div className="col-md-4" key={element.article_id || element.link}>
                   <NewsItem title={element.title ? element.title.slice(0, 65) : "None"} description={element.description ? element.description.slice(0, 100) : "None"} imageUrl={element.image_url} newsUrl={element.link} source={element.source_name}
                     date={element.pubDate} />
@@ -201,7 +180,21 @@ export class News extends Component {
 
     )
   }
-}
+
+ News.defaultProps = {
+    country: 'PK',
+    pageSize: 8,
+    category: 'general',
+     
+
+  }
+   News.propTypes = {
+    country: PropTypes.string,
+    pageSize: PropTypes.number,
+    category: PropTypes.string,
+     
+  }
+
 
 export default News
 
