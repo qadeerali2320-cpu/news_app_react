@@ -151,7 +151,8 @@ const scrollRef=useRef(null)
 
     <div className="container news-container" >
       <h2>Top Headlines from {capitalizeFirstCharacter(props.category)} </h2>
-      <div ref={scrollRef} >
+      <div ref={scrollRef} 
+       >
         <InfiniteScroll
           dataLength={articles.length}
           next={fetchMore}
