@@ -12,7 +12,23 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+/* ✅ Navbar ke neeche content push karo - Heading chhupne se bachegi */
+body {
+  padding-top: 80px !important;
+}
 
+/* ✅ Mobile */
+@media (max-width: 768px) {
+  body {
+    padding-top: 70px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    padding-top: 60px !important;
+  }
+}
 .App-header {
   background-color: #2a4e97;
   min-height: 100vh;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback,useRef } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import NewsItem from './NewsItem'
 import './NewsCSS.css';  // CSS-Import
 import PropTypes from 'prop-types'
@@ -12,6 +12,7 @@ const News = (props) => {
   const [nextPageToken, setNextPageToken] = useState(null)
   const [hasMore, setHasMore] = useState(true)
   const [page, setPage] = useState(1)
+  const scrollRef = useRef(null)
   const capitalizeFirstCharacter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -33,12 +34,28 @@ const News = (props) => {
       const parsedData = await response.json();
       if (parsedData.status === 'success' && parsedData.results && Array.isArray(parsedData.results)) {
         props.setProgress(30);
+        const seenImages = new Set();
+        const seenTitles = new Set();
         const filteredArticles = parsedData.results
           .filter((element) => {
+            if (element.duplicate) return false;
+
             const isDuplicate = element.duplicate;
             const hasImage = element.image_url && element.image_url.length > 0;
-            return !isDuplicate && hasImage;
-          });
+            if (!hasImage) return false;
+            if (seenImages.has(element.image_url)) return false;
+            seenImages.add(element.image_url);
+            const cleanTitle = element.title ? element.title.slice(0, 60).toLowerCase() : '';
+            if (seenTitles.has(cleanTitle)) {
+              console.log("Duplicate title removed:", element.title);
+              return false;
+            }
+            seenTitles.add(cleanTitle);
+            return true;
+          })
+
+        console.log(`📊 Total: ${parsedData.results.length}, ✅ Filtered: ${filteredArticles.length}`)
+
         if (props.setProgress) props.setProgress(60);
         const result = {
           articles: filteredArticles,
@@ -109,7 +126,7 @@ const News = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.category])
 
-const scrollRef=useRef(null)
+
   // Loading
   if (loading) {
     return (
@@ -141,18 +158,18 @@ const scrollRef=useRef(null)
     return (
       <div className="container news-container">
         <h2>Top Headlines</h2>
-        <p>No news articles found. Please try again later.</p>
+        <p style={{ color: 'red' }}>⚠️No news articles found. Please try again later.</p>
       </div>
     );
   }
 
-  
+
   return (
 
     <div className="container news-container" >
       <h2>Top Headlines from {capitalizeFirstCharacter(props.category)} </h2>
-      <div ref={scrollRef} 
-       >
+      <div ref={scrollRef}
+      >
         <InfiniteScroll
           dataLength={articles.length}
           next={fetchMore}
