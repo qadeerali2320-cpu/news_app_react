@@ -12,7 +12,6 @@ const News = (props) => {
   const [nextPageToken, setNextPageToken] = useState(null)
   const [hasMore, setHasMore] = useState(true)
   const [page, setPage] = useState(1)
-  const scrollRef = useRef(null)
   const capitalizeFirstCharacter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -26,7 +25,7 @@ const News = (props) => {
     try {
 
       //  Agar token hai toh use karo, warna pehla page
-      let url = `https://newsdata.io/api/1/news?apikey=${props.apiKey}&language=en&size=${props.pageSize}&q=${props.category}`;
+      let url = `https://newsdata.io/api/1/news?apikey=${props.apiKey}&country=${props.country}&language=en&size=${props.pageSize}&q=${props.category}`;
       if (pageToken) {
         url += `&page=${pageToken}`;
       }
@@ -36,6 +35,7 @@ const News = (props) => {
         props.setProgress(30);
         const seenImages = new Set();
         const seenTitles = new Set();
+        const seenTitleKeys = new Set();
         const filteredArticles = parsedData.results
           .filter((element) => {
             if (element.duplicate) return false;
@@ -45,12 +45,25 @@ const News = (props) => {
             if (!hasImage) return false;
             if (seenImages.has(element.image_url)) return false;
             seenImages.add(element.image_url);
-            const cleanTitle = element.title ? element.title.slice(0, 60).toLowerCase() : '';
-            if (seenTitles.has(cleanTitle)) {
-              console.log("Duplicate title removed:", element.title);
-              return false;
-            }
-            seenTitles.add(cleanTitle);
+             const cleanImageUrl = element.image_url.split('?')[0];
+          if (seenImages.has(cleanImageUrl)) return false;
+          seenImages.add(cleanImageUrl);
+           
+          const cleanTitle = element.title 
+            ? element.title.toLowerCase()
+                .replace(/[^a-z0-9]/g, ' ')  // Remove special chars
+                .replace(/\s+/g, ' ')         // Remove extra spaces
+                .trim()
+            : '';
+          
+          
+          const titleKey = cleanTitle.slice(0, 80);
+          if (seenTitles.has(titleKey)) {
+            console.log("🗑️ Duplicate title removed:", element.title);
+            return false;
+          }
+          seenTitles.add(titleKey);
+          
             return true;
           })
 
@@ -168,13 +181,12 @@ const News = (props) => {
 
     <div className="container news-container" >
       <h2>Top Headlines from {capitalizeFirstCharacter(props.category)} </h2>
-      <div ref={scrollRef}
-      >
+      <div className='container' >
         <InfiniteScroll
           dataLength={articles.length}
           next={fetchMore}
           hasMore={hasMore}
-          scrollableTarget={scrollRef.current}
+          
           loader={
             <div className="text-center my-4">
               <div className="loading-spinner spinner-border" role="status">
@@ -186,8 +198,8 @@ const News = (props) => {
           endMessage={<p style={{ textAlign: 'center' }}>All items loaded.</p>}
         >
           <div className="row">
-            {articles.map((element) => {
-              return <div className="col-md-4" key={element.article_id || element.link}>
+            {articles.map((element,index) => {
+              return <div className="col-md-4" key={`${element.article_id}-${index}`}>
                 <NewsItem title={element.title ? element.title.slice(0, 65) : "None"} description={element.description ? element.description.slice(0, 100) : "None"} imageUrl={element.image_url} newsUrl={element.link} source={element.source_name}
                   date={element.pubDate} />
               </div>

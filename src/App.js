@@ -34,17 +34,17 @@ const App = () => {
         />
         <Navbar />
         <Routes>
-          <Route path="/" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={9} category="general" />} />
+          <Route path="/" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={9} country="PK" category="general" />} />
           <Route path="/About" element={<About />} />
-          <Route key="/General" path="/General" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={9} category="general" />} />
-          <Route key="/science" path="/Science" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={9} category="science" />} />
-          <Route key="/general" path="/General" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={9} category="general" />} />
-          <Route key="/entertainment" path="/Entertainment" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={9} category="entertainment" />} />
-          <Route key="/health" path="/Health" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={9} category="health" />} />
-          <Route key="/sports" path="/Sports" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={9} category="sports" />} />
-          <Route key="/about" path="/About" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={9} category="general" />} />
-          <Route key="/business" path="/Business" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={9} category="business" />} />
-          <Route key="/technology" path="/Technology" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={9} category="technology" />} />
+          <Route key="/General" path="/General" element={<News setProgress={setProgress} apiKey={apiKey} country="PK" pageSize={9} category="general" />} />
+          <Route key="/science" path="/Science" element={<News setProgress={setProgress} apiKey={apiKey} country="PK" pageSize={9} category="science" />} />
+          <Route key="/general" path="/General" element={<News setProgress={setProgress} apiKey={apiKey} country="PK" pageSize={9} category="general" />} />
+          <Route key="/entertainment" path="/Entertainment" element={<News setProgress={setProgress} country="PK" apiKey={apiKey} pageSize={9} category="entertainment" />} />
+          <Route key="/health" path="/Health" element={<News setProgress={setProgress} apiKey={apiKey} country="PK" pageSize={9} category="health" />} />
+          <Route key="/sports" path="/Sports" element={<News setProgress={setProgress} apiKey={apiKey} country="PK" pageSize={9} category="sports" />} />
+          <Route key="/about" path="/About" element={<News setProgress={setProgress} apiKey={apiKey} country="PK" pageSize={9} category="general" />} />
+          <Route key="/business" path="/Business" element={<News setProgress={setProgress} apiKey={apiKey} country="PK" pageSize={9} category="business" />} />
+          <Route key="/technology" path="/Technology" element={<News setProgress={setProgress} apiKey={apiKey} country="PK" pageSize={9} category="technology" />} />
         </Routes>
       </div>
     </Router>
