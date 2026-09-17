@@ -17,7 +17,7 @@ import {
 
 
 const App = () => {
-
+//will manage the api key in the env folder soon 
   const apiKey = "pub_38580e65b08a403ba0067619e63d5d0c"
 
   const [progress, setProgress] = useState(0)
