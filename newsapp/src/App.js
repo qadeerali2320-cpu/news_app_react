@@ -18,7 +18,7 @@ import {
 
 const App = () => {
 
-  const apiKey = "pub_38580e65b08a403ba0067619e63d5d0c"
+  const apiKey = process.env.REACT_APP_NEWS_API;
 
   const [progress, setProgress] = useState(0)
 
